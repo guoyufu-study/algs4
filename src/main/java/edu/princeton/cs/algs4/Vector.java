@@ -93,7 +93,7 @@ public class Vector {
     }
 
     /**
-     * Returns the do product of this vector with the specified vector.
+     * Returns the dot product of this vector with the specified vector.
      *
      * @param  that the other vector
      * @return the dot product of this vector and that vector
@@ -251,7 +251,7 @@ public class Vector {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

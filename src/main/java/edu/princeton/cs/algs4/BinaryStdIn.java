@@ -136,7 +136,7 @@ public final class BinaryStdIn {
     }
 
    /**
-     * Reads the next r bits from standard input and return as an r-bit character.
+     * Reads the next <em>r</em> bits from standard input and return as an <em>r</em>-bit character.
      *
      * @param  r number of bits to read.
      * @return the next r bits of data from standard input as a {@code char}
@@ -210,7 +210,7 @@ public final class BinaryStdIn {
     }
 
    /**
-     * Reads the next r bits from standard input and return as an r-bit int.
+     * Reads the next <em>r</em> bits from standard input and return as an <em>r</em>-bit int.
      *
      * @param  r number of bits to read.
      * @return the next r bits of data from standard input as a {@code int}
@@ -299,7 +299,7 @@ public final class BinaryStdIn {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

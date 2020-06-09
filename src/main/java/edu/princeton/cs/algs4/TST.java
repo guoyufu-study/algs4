@@ -139,6 +139,7 @@ public class TST<Value> {
             throw new IllegalArgumentException("calls put() with null key");
         }
         if (!contains(key)) n++;
+        else if(val == null) n--;       // delete existing key
         root = put(root, key, val, 0);
     }
 
@@ -297,7 +298,7 @@ public class TST<Value> {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

@@ -36,13 +36,22 @@ import java.util.NoSuchElementException;
  *  named 0 through <em>V</em> - 1.
  *  It supports the following two primary operations: add an edge to the digraph,
  *  iterate over all of the vertices adjacent from a given vertex.
+ *  It also provides
+ *  methods for returning the indegree or outdegree of a vertex, 
+ *  the number of vertices <em>V</em> in the digraph, 
+ *  the number of edges <em>E</em> in the digraph, and the reverse digraph.
  *  Parallel edges and self-loops are permitted.
  *  <p>
- *  This implementation uses an adjacency-lists representation, which 
+ *  This implementation uses an <em>adjacency-lists representation</em>, which
  *  is a vertex-indexed array of {@link Bag} objects.
- *  All operations take constant time (in the worst case) except
- *  iterating over the vertices adjacent from a given vertex, which takes
- *  time proportional to the number of such vertices.
+ *  It uses &Theta;(<em>E</em> + <em>V</em>) space, where <em>E</em> is
+ *  the number of edges and <em>V</em> is the number of vertices.
+ *  All instance methods take &Theta;(1) time. (Though, iterating over
+ *  the vertices returned by {@link #adj(int)} takes time proportional
+ *  to the outdegree of the vertex.)
+ *  Constructing an empty digraph with <em>V</em> vertices takes
+ *  &Theta;(<em>V</em>) time; constructing a digraph with <em>E</em> edges
+ *  and <em>V</em> vertices takes &Theta;(<em>E</em> + <em>V</em>) time.
  *  <p>
  *  For additional documentation,
  *  see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of
@@ -84,11 +93,13 @@ public class Digraph {
      * followed by <em>E</em> pairs of vertices, with each entry separated by whitespace.
      *
      * @param  in the input stream
+     * @throws IllegalArgumentException if {@code in} is {@code null}
      * @throws IllegalArgumentException if the endpoints of any edge are not in prescribed range
      * @throws IllegalArgumentException if the number of vertices or edges is negative
      * @throws IllegalArgumentException if the input stream is in the wrong format
      */
     public Digraph(In in) {
+        if (in == null) throw new IllegalArgumentException("argument is null");
         try {
             this.V = in.readInt();
             if (V < 0) throw new IllegalArgumentException("number of vertices in a Digraph must be nonnegative");
@@ -114,12 +125,26 @@ public class Digraph {
      * Initializes a new digraph that is a deep copy of the specified digraph.
      *
      * @param  G the digraph to copy
+     * @throws IllegalArgumentException if {@code G} is {@code null}
      */
     public Digraph(Digraph G) {
-        this(G.V());
+        if (G == null) throw new IllegalArgumentException("argument is null");
+
+        this.V = G.V();
         this.E = G.E();
+        if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
+
+        // update indegrees
+        indegree = new int[V];
         for (int v = 0; v < V; v++)
             this.indegree[v] = G.indegree(v);
+
+        // update adjacency lists
+        adj = (Bag<Integer>[]) new Bag[V];
+        for (int v = 0; v < V; v++) {
+            adj[v] = new Bag<Integer>();
+        }
+
         for (int v = 0; v < G.V(); v++) {
             // reverse so that adjacency list is in same order as original
             Stack<Integer> reverse = new Stack<Integer>();
@@ -258,7 +283,7 @@ public class Digraph {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

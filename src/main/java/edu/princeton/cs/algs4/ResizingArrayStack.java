@@ -74,11 +74,11 @@ public class ResizingArrayStack<Item> implements Iterable<Item> {
         assert capacity >= n;
 
         // textbook implementation
-        Item[] temp = (Item[]) new Object[capacity];
+        Item[] copy = (Item[]) new Object[capacity];
         for (int i = 0; i < n; i++) {
-            temp[i] = a[i];
+            copy[i] = a[i];
         }
-        a = temp;
+        a = copy;
 
        // alternative implementation
        // a = java.util.Arrays.copyOf(a, capacity);
@@ -169,7 +169,7 @@ public class ResizingArrayStack<Item> implements Iterable<Item> {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

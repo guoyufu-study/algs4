@@ -2,7 +2,7 @@
  *  Compilation:  javac FrequencyCounter.java
  *  Execution:    java FrequencyCounter L < input.txt
  *  Dependencies: ST.java StdIn.java StdOut.java
- *  Data files:   https://algs4.cs.princeton.edu/31elementary/tnyTale.txt
+ *  Data files:   https://algs4.cs.princeton.edu/31elementary/tinyTale.txt
  *                https://algs4.cs.princeton.edu/31elementary/tale.txt
  *                https://algs4.cs.princeton.edu/31elementary/leipzig100K.txt
  *                https://algs4.cs.princeton.edu/31elementary/leipzig300K.txt
@@ -86,7 +86,7 @@ public class FrequencyCounter {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

@@ -129,11 +129,11 @@ public class LinkedStack<Item> implements Iterable<Item> {
      * @return an iterator to this stack that iterates through the items in LIFO order.
      */
     public Iterator<Item> iterator() {
-        return new ListIterator();
+        return new LinkedIterator();
     }
 
     // an iterator, doesn't implement remove() since it's optional
-    private class ListIterator implements Iterator<Item> {
+    private class LinkedIterator implements Iterator<Item> {
         private Node current = first;
         public boolean hasNext()  { return current != null;                     }
         public void remove()      { throw new UnsupportedOperationException();  }
@@ -196,7 +196,7 @@ public class LinkedStack<Item> implements Iterable<Item> {
 
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

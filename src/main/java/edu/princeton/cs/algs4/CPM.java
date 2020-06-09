@@ -37,9 +37,9 @@ package edu.princeton.cs.algs4;
  *  <p>
  *  This implementation uses {@link AcyclicLP} to find a longest
  *  path in a DAG.
- *  The running time is proportional to <em>V</em> + <em>E</em>,
- *  where <em>V</em> is the number of jobs and <em>E</em> is the
- *  number of precedence constraints.
+ *  The program takes &Theta;(<em>V</em> + <em>E</em>) time in
+ *  the worst case, where <em>V</em> is the number of jobs and
+ *  <em>E</em> is the number of precedence constraints.
  *  <p>
  *  For additional documentation,
  *  see <a href="https://algs4.cs.princeton.edu/44sp">Section 4.4</a> of
@@ -99,7 +99,7 @@ public class CPM {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

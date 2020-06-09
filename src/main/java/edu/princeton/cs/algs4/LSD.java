@@ -47,7 +47,7 @@ public class LSD {
     private LSD() { }
 
    /**  
-     * Rearranges the array of W-character strings in ascending order.
+     * Rearranges the array of w-character strings in ascending order.
      *
      * @param a the array to be sorted
      * @param w the number of characters per string
@@ -155,7 +155,7 @@ public class LSD {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

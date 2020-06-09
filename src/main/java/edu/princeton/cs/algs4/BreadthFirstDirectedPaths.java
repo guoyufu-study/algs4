@@ -29,17 +29,16 @@
 package edu.princeton.cs.algs4;
 
 /**
- *  The {@code BreadthDirectedFirstPaths} class represents a data type for finding
- *  shortest paths (number of edges) from a source vertex <em>s</em>
+ *  The {@code BreadthDirectedFirstPaths} class represents a data type for
+ *  finding shortest paths (number of edges) from a source vertex <em>s</em>
  *  (or set of source vertices) to every other vertex in the digraph.
  *  <p>
  *  This implementation uses breadth-first search.
- *  The constructor takes time proportional to <em>V</em> + <em>E</em>,
- *  where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
- *  Each call to {@link #distTo(int)} and {@link #hasPathTo(int)} takes constant time;
- *  each call to {@link #pathTo(int)} takes time proportional to the length
- *  of the path.
- *  It uses extra space (not including the digraph) proportional to <em>V</em>.
+ *  The constructor takes &Theta;(<em>V</em> + <em>E</em>) time in the
+ *  worst case, where <em>V</em> is the number of vertices and <em>E</em> is
+ *  the number of edges.
+ *  Each instance method takes &Theta;(1) time.
+ *  It uses &Theta;(<em>V</em>) extra space (not including the digraph).
  *  <p>
  *  For additional documentation, 
  *  see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of 
@@ -75,6 +74,7 @@ public class BreadthFirstDirectedPaths {
      * to every other vertex in graph {@code G}.
      * @param G the digraph
      * @param sources the source vertices
+     * @throws IllegalArgumentException if {@code sources} is {@code null}
      * @throws IllegalArgumentException unless each vertex {@code v} in
      *         {@code sources} satisfies {@code 0 <= v < V}
      */
@@ -182,11 +182,11 @@ public class BreadthFirstDirectedPaths {
         if (vertices == null) {
             throw new IllegalArgumentException("argument is null");
         }
-        int V = marked.length;
-        for (int v : vertices) {
-            if (v < 0 || v >= V) {
-                throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
+        for (Integer v : vertices) {
+            if (v == null) {
+                throw new IllegalArgumentException("vertex is null");
             }
+            validateVertex(v);
         }
     }
 
@@ -225,7 +225,7 @@ public class BreadthFirstDirectedPaths {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

@@ -56,7 +56,7 @@ import java.util.regex.Pattern;
  *  <li> {@link #readBoolean()}
  *  </ul>
  *  <p>
- *  The first method returns true if standard input has more tokens.
+ *  The first method returns true if standard input has no more tokens.
  *  Each other method skips over any input that is whitespace. Then, it reads
  *  the next token and attempts to convert it into a value of the specified
  *  type. If it succeeds, it returns that value; otherwise, it
@@ -672,7 +672,7 @@ public final class StdIn {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

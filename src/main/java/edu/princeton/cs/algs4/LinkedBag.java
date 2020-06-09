@@ -99,15 +99,15 @@ public class LinkedBag<Item> implements Iterable<Item> {
      * Returns an iterator that iterates over the items in the bag.
      */
     public Iterator<Item> iterator()  {
-        return new ListIterator();  
+        return new LinkedIterator();  
     }
 
     // an iterator over a linked list
-    private class ListIterator implements Iterator<Item> {
+    private class LinkedIterator implements Iterator<Item> {
         private Node current;
 
         // creates a new iterator
-        public ListIterator() {
+        public LinkedIterator() {
             current = first;
         }
 
@@ -152,7 +152,7 @@ public class LinkedBag<Item> implements Iterable<Item> {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

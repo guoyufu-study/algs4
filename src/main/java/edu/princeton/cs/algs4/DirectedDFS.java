@@ -32,6 +32,8 @@ package edu.princeton.cs.algs4;
  *  The constructor takes time proportional to <em>V</em> + <em>E</em>
  *  (in the worst case),
  *  where <em>V</em> is the number of vertices and <em>E</em> is the number of edges.
+ *  Each instance method takes &Theta;(1) time.
+ *  It uses &Theta;(<em>V</em>) extra space (not including the digraph).
  *  <p>
  *  For additional documentation,
  *  see <a href="https://algs4.cs.princeton.edu/42digraph">Section 4.2</a> of
@@ -62,6 +64,7 @@ public class DirectedDFS {
      * connected to any of the source vertices {@code sources}.
      * @param G the graph
      * @param sources the source vertices
+     * @throws IllegalArgumentException if {@code sources} is {@code null}
      * @throws IllegalArgumentException unless {@code 0 <= s < V}
      *         for each vertex {@code s} in {@code sources}
      */
@@ -115,11 +118,11 @@ public class DirectedDFS {
         if (vertices == null) {
             throw new IllegalArgumentException("argument is null");
         }
-        int V = marked.length;
-        for (int v : vertices) {
-            if (v < 0 || v >= V) {
-                throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
+        for (Integer v : vertices) {
+            if (v == null) {
+                throw new IllegalArgumentException("vertex is null");
             }
+            validateVertex(v);
         }
     }
 
@@ -155,7 +158,7 @@ public class DirectedDFS {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

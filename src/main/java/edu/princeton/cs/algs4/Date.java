@@ -179,11 +179,7 @@ public class Date implements Comparable<Date> {
      */
     @Override
     public int hashCode() {
-        int hash = 17;
-        hash = 31*hash + month;
-        hash = 31*hash + day;
-        hash = 31*hash + year;
-        return hash;
+        return day + 31*month + 31*12*year;
     }
 
     /**
@@ -215,7 +211,7 @@ public class Date implements Comparable<Date> {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

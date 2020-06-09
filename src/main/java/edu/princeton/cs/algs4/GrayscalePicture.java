@@ -63,7 +63,7 @@ import javax.swing.KeyStroke;
  *  8-bit {@code int} to encode the grayscale value, thereby avoiding the need to
  *  create temporary {@code Color} objects.
  *  <p>
- *  A <em>W</em>-by-<en>H</em> picture uses ~ 4 <em>W H</em> bytes of memory,
+ *  A <em>W</em>-by-<em>H</em> picture uses ~ 4 <em>W H</em> bytes of memory,
  *  since the color of each pixel is encoded as a 32-bit <code>int</code>
  *  (even though, in principle, only ~ <em>W H</em> bytes are needed).
  *  <p>
@@ -122,31 +122,40 @@ public final class GrayscalePicture implements ActionListener {
    /**
      * Creates a grayscale picture by reading an image from a file or URL.
      *
-     * @param  filename the name of the file (.png, .gif, or .jpg) or URL.
+     * @param  name the name of the file (.png, .gif, or .jpg) or URL.
      * @throws IllegalArgumentException if cannot read image
-     * @throws IllegalArgumentException if {@code filename} is {@code null}
+     * @throws IllegalArgumentException if {@code name} is {@code null}
      */
-    public GrayscalePicture(String filename) {
-        if (filename == null) throw new IllegalArgumentException("constructor argument is null");
-        this.filename = filename;
+    public GrayscalePicture(String name) {
+        if (name == null) throw new IllegalArgumentException("constructor argument is null");
+        this.filename = name;
         try {
             // try to read from file in working directory
-            File file = new File(filename);
+            File file = new File(name);
             if (file.isFile()) {
                 image = ImageIO.read(file);
             }
 
-            // now try to read from file in same directory as this .class file
             else {
-                URL url = getClass().getResource(filename);
+
+                // resource relative to .class file
+                URL url = getClass().getResource(name);
+
+                // resource relative to classloader root
                 if (url == null) {
-                    url = new URL(filename);
+                    url = getClass().getClassLoader().getResource(name);
                 }
+     
+                // or URL from web
+                if (url == null) {
+                    url = new URL(name);
+                }
+        
                 image = ImageIO.read(url);
             }
 
             if (image == null) {
-                throw new IllegalArgumentException("could not read image file: " + filename);
+                throw new IllegalArgumentException("could not read image: " + name);
             }
 
             width  = image.getWidth(null);
@@ -162,7 +171,7 @@ public final class GrayscalePicture implements ActionListener {
             }
         }
         catch (IOException ioe) {
-            throw new IllegalArgumentException("could not open image file: " + filename, ioe);
+            throw new IllegalArgumentException("could not open image: " + name, ioe);
         }
     }
 
@@ -467,7 +476,7 @@ public final class GrayscalePicture implements ActionListener {
 
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

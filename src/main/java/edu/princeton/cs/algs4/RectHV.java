@@ -31,11 +31,11 @@ public final class RectHV {
      * x [<em>ymin</em>, <em>ymax</em>].
      *
      * @param  xmin the <em>x</em>-coordinate of the lower-left endpoint
-     * @param  xmax the <em>x</em>-coordinate of the upper-right endpoint
      * @param  ymin the <em>y</em>-coordinate of the lower-left endpoint
+     * @param  xmax the <em>x</em>-coordinate of the upper-right endpoint
      * @param  ymax the <em>y</em>-coordinate of the upper-right endpoint
      * @throws IllegalArgumentException if any of {@code xmin},
-     *         {@code xmax}, {@code ymin}, or {@code ymax}
+     *         {@code ymin}, {@code xmax}, or {@code ymax}
      *         is {@code Double.NaN}.
      * @throws IllegalArgumentException if {@code xmax < xmin} or {@code ymax < ymin}.
      */
@@ -224,7 +224,7 @@ public final class RectHV {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

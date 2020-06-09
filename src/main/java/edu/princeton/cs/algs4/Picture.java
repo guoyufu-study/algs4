@@ -62,17 +62,17 @@ import javax.swing.KeyStroke;
  *  Given a 32-bit {@code int} encoding the color, the following code extracts
  *  the RGB components:
  * <blockquote><pre>
- *  int r = (rgb >> 16) & 0xFF;
- *  int g = (rgb >>  8) & 0xFF;
- *  int b = (rgb >>  0) & 0xFF;
+ *  int r = (rgb &gt;&gt; 16) &amp; 0xFF;
+ *  int g = (rgb &gt;&gt;  8) &amp; 0xFF;
+ *  int b = (rgb &gt;&gt;  0) &amp; 0xFF;
  *  </pre></blockquote> 
  *  Given the RGB components (8-bits each) of a color,
  *  the following statement packs it into a 32-bit {@code int}:
  * <blockquote><pre>
- *  int rgb = (r << 16) + (g << 8) + (b << 0);
+ *  int rgb = (r &lt;&lt; 16) + (g &lt;&lt; 8) + (b &lt;&lt; 0);
  * </pre></blockquote> 
  *  <p>
- *  A <em>W</em>-by-<en>H</em> picture uses ~ 4 <em>W H</em> bytes of memory,
+ *  A <em>W</em>-by-<em>H</em> picture uses ~ 4 <em>W H</em> bytes of memory,
  *  since the color of each pixel is encoded as a 32-bit <code>int</code>.
  *  <p>
  *  For additional documentation, see
@@ -97,12 +97,12 @@ public final class Picture implements ActionListener {
      *
      * @param width the width of the picture
      * @param height the height of the picture
-     * @throws IllegalArgumentException if {@code width} is negative
-     * @throws IllegalArgumentException if {@code height} is negative
+     * @throws IllegalArgumentException if {@code width} is negative or zero
+     * @throws IllegalArgumentException if {@code height} is negative or zero
      */
     public Picture(int width, int height) {
-        if (width  < 0) throw new IllegalArgumentException("width must be non-negative");
-        if (height < 0) throw new IllegalArgumentException("height must be non-negative");
+        if (width  <= 0) throw new IllegalArgumentException("width must be positive");
+        if (height <= 0) throw new IllegalArgumentException("height must be positive");
         this.width  = width;
         this.height = height;
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -131,39 +131,48 @@ public final class Picture implements ActionListener {
    /**
      * Creates a picture by reading an image from a file or URL.
      *
-     * @param  filename the name of the file (.png, .gif, or .jpg) or URL.
+     * @param  name the name of the file (.png, .gif, or .jpg) or URL.
      * @throws IllegalArgumentException if cannot read image
-     * @throws IllegalArgumentException if {@code filename} is {@code null}
+     * @throws IllegalArgumentException if {@code name} is {@code null}
      */
-    public Picture(String filename) {
-        if (filename == null) throw new IllegalArgumentException("constructor argument is null");
+    public Picture(String name) {
+        if (name == null) throw new IllegalArgumentException("constructor argument is null");
 
-        this.filename = filename;
+        this.filename = name;
         try {
             // try to read from file in working directory
-            File file = new File(filename);
+            File file = new File(name);
             if (file.isFile()) {
                 image = ImageIO.read(file);
             }
 
-            // now try to read from file in same directory as this .class file
             else {
+
+                // resource relative to .class file
                 URL url = getClass().getResource(filename);
+
+                // resource relative to classloader root
                 if (url == null) {
-                    url = new URL(filename);
+                    url = getClass().getClassLoader().getResource(name);
                 }
+
+                // or URL from web
+                if (url == null) {
+                    url = new URL(name);
+                }
+
                 image = ImageIO.read(url);
             }
 
             if (image == null) {
-                throw new IllegalArgumentException("could not read image file: " + filename);
+                throw new IllegalArgumentException("could not read image: " + name);
             }
 
             width  = image.getWidth(null);
             height = image.getHeight(null);
         }
         catch (IOException ioe) {
-            throw new IllegalArgumentException("could not open image file: " + filename, ioe);
+            throw new IllegalArgumentException("could not open image: " + name, ioe);
         }
     }
 
@@ -465,7 +474,7 @@ public final class Picture implements ActionListener {
 
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *

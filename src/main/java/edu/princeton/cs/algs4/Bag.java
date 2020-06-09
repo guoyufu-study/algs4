@@ -109,14 +109,14 @@ public class Bag<Item> implements Iterable<Item> {
      * @return an iterator that iterates over the items in this bag in arbitrary order
      */
     public Iterator<Item> iterator()  {
-        return new ListIterator<Item>(first);  
+        return new LinkedIterator(first);  
     }
 
     // an iterator, doesn't implement remove() since it's optional
-    private class ListIterator<Item> implements Iterator<Item> {
+    private class LinkedIterator implements Iterator<Item> {
         private Node<Item> current;
 
-        public ListIterator(Node<Item> first) {
+        public LinkedIterator(Node<Item> first) {
             current = first;
         }
 
@@ -152,7 +152,7 @@ public class Bag<Item> implements Iterable<Item> {
 }
 
 /******************************************************************************
- *  Copyright 2002-2018, Robert Sedgewick and Kevin Wayne.
+ *  Copyright 2002-2020, Robert Sedgewick and Kevin Wayne.
  *
  *  This file is part of algs4.jar, which accompanies the textbook
  *
