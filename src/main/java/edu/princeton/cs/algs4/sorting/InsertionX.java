@@ -29,6 +29,20 @@ import edu.princeton.cs.algs4.io.StdIn;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
+ * {@code InsertionX} 类提供了用于使用插入排序的优化版本（带有半交换和前哨）对数组进行排序的静态方法。
+ * 
+ * <p>
+ * 在最坏的情况下，此实现使 ~ 1/2 <em>n</em><sup>2</sup> 次比较，可对长度为 <em>n</em> 的数组进行排序。
+ * 因此，它不适合对大型数组进行排序（除非逆序对数量很小）。
+ * 
+ * <p>
+ * 这种排序算法是稳定的，它使用 &Theta;(1) 额外的内存（不包括输入数组）。
+ * 
+ * <p>
+ * 有关其他文档，请参见Robert Sedgewick和Kevin Wayne撰写的
+ * <i>第4版算法</i> <a href="https://algs4.cs.princeton.edu/21elementary">2.1节</a>。
+ * 
+ * <p>
  *  The {@code InsertionX} class provides static methods for sorting
  *  an array using an optimized version of insertion sort (with half exchanges
  *  and a sentinel).
@@ -51,16 +65,19 @@ import edu.princeton.cs.algs4.io.StdOut;
 
 public class InsertionX {
 
-    // This class should not be instantiated.
+    // 该类不应该被实例化
     private InsertionX() { }
 
     /**
+     * 使用自然顺序以升序重新排列数组。
+     * <p>
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
     public static void sort(Comparable[] a) {
         int n = a.length;
 
+        // 放置最小的元素作为哨兵
         // put smallest element in position to serve as sentinel
         int exchanges = 0;
         for (int i = n-1; i > 0; i--) {
@@ -71,7 +88,7 @@ public class InsertionX {
         }
         if (exchanges == 0) return;
 
-
+        // 半交换插入排序
         // insertion sort with half-exchanges
         for (int i = 2; i < n; i++) {
             Comparable v = a[i];
