@@ -40,7 +40,7 @@ import edu.princeton.cs.algs4.fundamentals.Queue;
 import edu.princeton.cs.algs4.fundamentals.UF;
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
-import edu.princeton.cs.algs4.sorting.MinPQ;
+import edu.princeton.cs.algs4.sorting.heap.MinPQ;
 
 /**
  *  The {@code KruskalMST} class represents a data type for computing a

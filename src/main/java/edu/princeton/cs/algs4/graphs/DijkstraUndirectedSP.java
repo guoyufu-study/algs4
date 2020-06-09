@@ -39,7 +39,7 @@ package edu.princeton.cs.algs4.graphs;
 import edu.princeton.cs.algs4.fundamentals.Stack;
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
-import edu.princeton.cs.algs4.sorting.IndexMinPQ;
+import edu.princeton.cs.algs4.sorting.heap.IndexMinPQ;
 
 /**
  *  The {@code DijkstraUndirectedSP} class represents a data type for solving

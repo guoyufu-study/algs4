@@ -24,7 +24,7 @@ package edu.princeton.cs.algs4.strings;
 
 import edu.princeton.cs.algs4.io.BinaryStdIn;
 import edu.princeton.cs.algs4.io.BinaryStdOut;
-import edu.princeton.cs.algs4.sorting.MinPQ;
+import edu.princeton.cs.algs4.sorting.heap.MinPQ;
 
 /**
  *  The {@code Huffman} class provides static methods for compressing

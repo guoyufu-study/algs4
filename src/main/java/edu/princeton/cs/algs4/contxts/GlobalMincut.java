@@ -26,7 +26,7 @@ import edu.princeton.cs.algs4.graphs.Edge;
 import edu.princeton.cs.algs4.graphs.EdgeWeightedGraph;
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
-import edu.princeton.cs.algs4.sorting.IndexMaxPQ;
+import edu.princeton.cs.algs4.sorting.heap.IndexMaxPQ;
 
 /**
  *  The {@code GlobalMincut} class represents a data type for computing a

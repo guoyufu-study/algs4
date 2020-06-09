@@ -22,12 +22,20 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4.sorting;
+package edu.princeton.cs.algs4.sorting.insertion;
 
 import edu.princeton.cs.algs4.io.StdIn;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
+ * {@code BinaryInsertion} 类提供了一种静态方法，该方法使用具有半交换的优化二进制插入排序对数组进行排序。
+ * 
+ * <p>
+ * 在最坏的情况下，此实现使 ~ <em>n</em> log<sub>2</sub><em>n</em> 次比较以对长度为n的数组进行排序。
+ * 但是，在最坏的情况下，运行时间为 &Theta;(<em>n</em><sup>2</sup>)。
+ * 因为数组访问的次数可以是二次的，因此不适合对大数组进行排序（除非逆序对数量很小）。
+ * 
+ * <p>
  *  The {@code BinaryInsertion} class provides a static method for sorting an
  *  array using an optimized binary insertion sort with half exchanges.
  *  <p>

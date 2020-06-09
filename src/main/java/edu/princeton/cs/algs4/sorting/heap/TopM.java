@@ -17,12 +17,13 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4.sorting;
+package edu.princeton.cs.algs4.sorting.heap;
 
 import edu.princeton.cs.algs4.fundamentals.Stack;
 import edu.princeton.cs.algs4.fundamentals.Transaction;
 import edu.princeton.cs.algs4.io.StdIn;
 import edu.princeton.cs.algs4.io.StdOut;
+import edu.princeton.cs.algs4.sorting.heap.MinPQ;
 
 /**
  *  The {@code TopM} class provides a client that reads a sequence of

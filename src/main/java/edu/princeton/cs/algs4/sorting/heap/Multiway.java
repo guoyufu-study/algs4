@@ -23,10 +23,11 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4.sorting;
+package edu.princeton.cs.algs4.sorting.heap;
 
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
+import edu.princeton.cs.algs4.sorting.heap.IndexMinPQ;
 
 /**
  *  The {@code Multiway} class provides a client for reading in several

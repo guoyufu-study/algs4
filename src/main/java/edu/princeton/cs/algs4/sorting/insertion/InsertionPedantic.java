@@ -1,4 +1,4 @@
-package edu.princeton.cs.algs4.sorting;
+package edu.princeton.cs.algs4.sorting.insertion;
 
 import java.util.Comparator;
 

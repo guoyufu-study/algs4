@@ -17,7 +17,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4.sorting;
+package edu.princeton.cs.algs4.sorting.heap;
 
 import java.util.Comparator;
 import java.util.Iterator;

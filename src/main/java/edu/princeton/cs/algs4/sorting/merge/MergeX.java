@@ -22,7 +22,7 @@
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4.sorting;
+package edu.princeton.cs.algs4.sorting.merge;
 
 import java.util.Comparator;
 

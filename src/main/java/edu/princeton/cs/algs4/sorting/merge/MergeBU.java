@@ -1,59 +1,44 @@
 /******************************************************************************
- *  Compilation:  javac InsertionX.java
- *  Execution:    java InsertionX < input.txt
+ *  Compilation:  javac MergeBU.java
+ *  Execution:    java MergeBU < input.txt
  *  Dependencies: StdOut.java StdIn.java
- *  Data files:   https://algs4.cs.princeton.edu/21elementary/tiny.txt
- *                https://algs4.cs.princeton.edu/21elementary/words3.txt
- *  
- *  Sorts a sequence of strings from standard input using an optimized
- *  version of insertion sort that uses half exchanges instead of 
- *  full exchanges to reduce data movement..
- *
+ *  Data files:   https://algs4.cs.princeton.edu/22mergesort/tiny.txt
+ *                https://algs4.cs.princeton.edu/22mergesort/words3.txt
+ *   
+ *  Sorts a sequence of strings from standard input using
+ *  bottom-up mergesort.
+ *   
  *  % more tiny.txt
  *  S O R T E X A M P L E
  *
- *  % java InsertionX < tiny.txt
+ *  % java MergeBU < tiny.txt
  *  A E E L M O P R S T X                 [ one string per line ]
- *
+ *    
  *  % more words3.txt
  *  bed bug dad yes zoo ... all bad yet
- *
- *  % java InsertionX < words3.txt
- *  all bad bed bug dad ... yes yet zoo   [ one string per line ]
+ *  
+ *  % java MergeBU < words3.txt
+ *  all bad bed bug dad ... yes yet zoo    [ one string per line ]
  *
  ******************************************************************************/
 
-package edu.princeton.cs.algs4.sorting;
+package edu.princeton.cs.algs4.sorting.merge;
 
 import edu.princeton.cs.algs4.io.StdIn;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
- * {@code InsertionX} 类提供了用于使用插入排序的优化版本（带有半交换和前哨）对数组进行排序的静态方法。
- * 
- * <p>
- * 在最坏的情况下，此实现使 ~ 1/2 <em>n</em><sup>2</sup> 次比较，可对长度为 <em>n</em> 的数组进行排序。
- * 因此，它不适合对大型数组进行排序（除非逆序对数量很小）。
- * 
- * <p>
- * 这种排序算法是稳定的，它使用 &Theta;(1) 额外的内存（不包括输入数组）。
- * 
- * <p>
- * 有关其他文档，请参见Robert Sedgewick和Kevin Wayne撰写的
- * <i>第4版算法</i> <a href="https://algs4.cs.princeton.edu/21elementary">2.1节</a>。
- * 
- * <p>
- *  The {@code InsertionX} class provides static methods for sorting
- *  an array using an optimized version of insertion sort (with half exchanges
- *  and a sentinel).
+ *  The {@code MergeBU} class provides static methods for sorting an
+ *  array using <em>bottom-up mergesort</em>. It is non-recursive.
  *  <p>
- *  In the worst case, this implementation makes ~ 1/2 <em>n</em><sup>2</sup>
- *  compares to sort an array of length <em>n</em>.
- *  So, it is not suitable for sorting large arrays
- *  (unless the number of inversions is small).
+ *  This implementation takes &Theta;(<em>n</em> log <em>n</em>) time
+ *  to sort any array of length <em>n</em> (assuming comparisons
+ *  take constant time). It makes between
+ *  ~ &frac12; <em>n</em> log<sub>2</sub> <em>n</em> and
+ *  ~ 1 <em>n</em> log<sub>2</sub> <em>n</em> compares.
  *  <p>
  *  This sorting algorithm is stable.
- *  It uses &Theta;(1) extra memory (not including the input array).
+ *  It uses &Theta;(<em>n</em>) extra memory (not including the input array).
  *  <p>
  *  For additional documentation, see
  *  <a href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
@@ -62,62 +47,54 @@ import edu.princeton.cs.algs4.io.StdOut;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
+public class MergeBU {
 
-public class InsertionX {
+    // This class should not be instantiated.
+    private MergeBU() { }
 
-    // 该类不应该被实例化
-    private InsertionX() { }
+    // stably merge a[lo..mid] with a[mid+1..hi] using aux[lo..hi]
+    private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
+
+        // copy to aux[]
+        for (int k = lo; k <= hi; k++) {
+            aux[k] = a[k]; 
+        }
+
+        // merge back to a[]
+        int i = lo, j = mid+1;
+        for (int k = lo; k <= hi; k++) {
+            if      (i > mid)              a[k] = aux[j++];  // this copying is unneccessary
+            else if (j > hi)               a[k] = aux[i++];
+            else if (less(aux[j], aux[i])) a[k] = aux[j++];
+            else                           a[k] = aux[i++];
+        }
+
+    }
 
     /**
-     * 使用自然顺序以升序重新排列数组。
-     * <p>
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
     public static void sort(Comparable[] a) {
         int n = a.length;
-
-        // 放置最小的元素作为哨兵
-        // put smallest element in position to serve as sentinel
-        int exchanges = 0;
-        for (int i = n-1; i > 0; i--) {
-            if (less(a[i], a[i-1])) {
-                exch(a, i, i-1);
-                exchanges++;
+        Comparable[] aux = new Comparable[n];
+        for (int len = 1; len < n; len *= 2) {
+            for (int lo = 0; lo < n-len; lo += len+len) {
+                int mid  = lo+len-1;
+                int hi = Math.min(lo+len+len-1, n-1);
+                merge(a, aux, lo, mid, hi);
             }
         }
-        if (exchanges == 0) return;
-
-        // 半交换插入排序
-        // insertion sort with half-exchanges
-        for (int i = 2; i < n; i++) {
-            Comparable v = a[i];
-            int j = i;
-            while (less(v, a[j-1])) {
-                a[j] = a[j-1];
-                j--;
-            }
-            a[j] = v;
-        }
-
         assert isSorted(a);
     }
 
-
-   /***************************************************************************
+  /***********************************************************************
     *  Helper sorting functions.
     ***************************************************************************/
     
     // is v < w ?
     private static boolean less(Comparable v, Comparable w) {
         return v.compareTo(w) < 0;
-    }
-        
-    // exchange a[i] and a[j]
-    private static void exch(Object[] a, int i, int j) {
-        Object swap = a[i];
-        a[i] = a[j];
-        a[j] = swap;
     }
 
 
@@ -138,17 +115,16 @@ public class InsertionX {
     }
 
     /**
-     * Reads in a sequence of strings from standard input; insertion sorts them;
-     * and prints them to standard output in ascending order.
+     * Reads in a sequence of strings from standard input; bottom-up
+     * mergesorts them; and prints them to standard output in ascending order. 
      *
      * @param args the command-line arguments
      */
     public static void main(String[] args) {
         String[] a = StdIn.readAllStrings();
-        InsertionX.sort(a);
+        MergeBU.sort(a);
         show(a);
     }
-
 }
 
 /******************************************************************************

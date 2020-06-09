@@ -22,7 +22,7 @@ import java.awt.Color;
 
 import edu.princeton.cs.algs4.io.StdDraw;
 import edu.princeton.cs.algs4.io.StdIn;
-import edu.princeton.cs.algs4.sorting.MinPQ;
+import edu.princeton.cs.algs4.sorting.heap.MinPQ;
 
 /**
  *  The {@code CollisionSystem} class represents a collection of particles

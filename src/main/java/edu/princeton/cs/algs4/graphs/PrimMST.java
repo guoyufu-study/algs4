@@ -42,7 +42,7 @@ import edu.princeton.cs.algs4.fundamentals.Queue;
 import edu.princeton.cs.algs4.fundamentals.UF;
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
-import edu.princeton.cs.algs4.sorting.IndexMinPQ;
+import edu.princeton.cs.algs4.sorting.heap.IndexMinPQ;
 
 /**
  *  The {@code PrimMST} class represents a data type for computing a

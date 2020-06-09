@@ -15,7 +15,7 @@ package edu.princeton.cs.algs4.graphs;
 import edu.princeton.cs.algs4.io.StdOut;
 import edu.princeton.cs.algs4.io.StdRandom;
 import edu.princeton.cs.algs4.searching.SET;
-import edu.princeton.cs.algs4.sorting.MinPQ;
+import edu.princeton.cs.algs4.sorting.heap.MinPQ;
 
 /**
  *  The {@code GraphGenerator} class provides static methods for creating
