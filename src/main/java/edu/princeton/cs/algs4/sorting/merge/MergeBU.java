@@ -28,6 +28,22 @@ import edu.princeton.cs.algs4.io.StdIn;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
+ * {@code MergeBU} 类提供了使用自下而上的归并排序对数组进行排序的静态方法。
+ *  它是非递归的。
+ *  
+ *  <p>
+ *  此实现需要 &Theta;(<em>n</em> log <em>n</em>) 时间来对长度为 <em>n</em> 的任何数组进行排序（假设比较需要固定时间）。
+ *  它进行 ~ &frac12; <em>n</em> log<sub>2</sub> <em>n</em> 到
+ *  ~ 1 <em>n</em> log<sub>2</sub> <em>n</em> 次比较。
+ *  
+ *  <p>
+ *  这种排序算法是稳定的。它使用 &Theta;(<em>n</em>) 额外的内存（不包括输入数组）。
+ *  
+ *  <p>
+ *  有关其他文档，请参见 Robert Sedgewick and Kevin Wayne 撰写的 
+ *  <i>第4版算法</i> <a href="https://algs4.cs.princeton.edu/21elementary">2.1节</a>。
+ *  
+ * <p>
  *  The {@code MergeBU} class provides static methods for sorting an
  *  array using <em>bottom-up mergesort</em>. It is non-recursive.
  *  <p>
@@ -72,6 +88,8 @@ public class MergeBU {
     }
 
     /**
+     * 使用自然顺序以升序重新排列数组
+     * <p>
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
@@ -89,7 +107,7 @@ public class MergeBU {
     }
 
   /***********************************************************************
-    *  Helper sorting functions.
+    *  排序辅助函数
     ***************************************************************************/
     
     // is v < w ?
@@ -99,7 +117,7 @@ public class MergeBU {
 
 
    /***************************************************************************
-    *  Check if array is sorted - useful for debugging.
+    *  检查数组是否有序。用于调试
     ***************************************************************************/
     private static boolean isSorted(Comparable[] a) {
         for (int i = 1; i < a.length; i++)
@@ -115,6 +133,8 @@ public class MergeBU {
     }
 
     /**
+     * 从标准输入中读取一系列字符串； 将它们自下而上的归并排序； 并将它们以升序打印到标准输出。
+     * <p>
      * Reads in a sequence of strings from standard input; bottom-up
      * mergesorts them; and prints them to standard output in ascending order. 
      *

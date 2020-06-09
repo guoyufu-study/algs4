@@ -49,21 +49,21 @@ import edu.princeton.cs.algs4.io.StdOut;
  */
 public class Merge {
 
-    // This class should not be instantiated.
+    // 这个类不应该被实例化
     private Merge() { }
 
-    // stably merge a[lo .. mid] with a[mid+1 ..hi] using aux[lo .. hi]
+    // 使用 aux[lo .. hi] 稳定地合并 [lo .. mid] 与 [mid+1 ..hi] 
     private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi) {
-        // precondition: a[lo .. mid] and a[mid+1 .. hi] are sorted subarrays
+        // 前提条件： a[lo .. mid] 和 a[mid+1 .. hi] 是有序子数组
         assert isSorted(a, lo, mid);
         assert isSorted(a, mid+1, hi);
 
-        // copy to aux[]
+        // 复制到 aux[]
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k]; 
         }
 
-        // merge back to a[]
+        // 归并回 a[]
         int i = lo, j = mid+1;
         for (int k = lo; k <= hi; k++) {
             if      (i > mid)              a[k] = aux[j++];
