@@ -29,6 +29,20 @@ import edu.princeton.cs.algs4.io.StdIn;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
+ * {@code Selection} 类提供了使用 <em>选择排序</em> 对数组进行排序的静态方法。
+ * 
+ * <p>
+ * 此实现使 ~ 1/2 <em>n</em><sup>2</sup> 次比较，可对长度为 <em>n</em> 的数组进行排序。因此不适合对大型数组进行排序。
+ * 它恰好执行n次交换。
+ * 
+ * <p>
+ * 此排序算法不稳定。 它使用 &Theta;(1) 额外的内存（不包括输入数组）。
+ * 
+ * <p>
+ * 有关其他文档，请参见Robert Sedgewick和Kevin Wayne撰写的
+ * <i>第4版算法</i> <a href="https://algs4.cs.princeton.edu/21elementary">2.1节</a>。
+ * 
+ * <p>
  *  The {@code Selection} class provides static methods for sorting an
  *  array using <em>selection sort</em>.
  *  This implementation makes ~ &frac12; <em>n</em><sup>2</sup> compares to sort
@@ -47,10 +61,12 @@ import edu.princeton.cs.algs4.io.StdOut;
  */
 public class Selection {
 
-    // This class should not be instantiated.
+    // 该类不应该被实例化
     private Selection() { }
 
     /**
+     * 使用自然顺序以升序重新排列数组。
+     * <p>
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
@@ -68,6 +84,8 @@ public class Selection {
     }
 
     /**
+     * 使用比较器按升序重新排列数组。
+     * <p>
      * Rearranges the array in ascending order, using a comparator.
      * @param a the array
      * @param comparator the comparator specifying the order
@@ -87,7 +105,7 @@ public class Selection {
 
 
    /***************************************************************************
-    *  Helper sorting functions.
+    *  排序辅助函数.
     ***************************************************************************/
     
     // is v < w ?
@@ -110,7 +128,7 @@ public class Selection {
 
 
    /***************************************************************************
-    *  Check if array is sorted - useful for debugging.
+    *  检查数组是否有序。用于调试。
     ***************************************************************************/
 
     // is the array a[] sorted?
@@ -147,6 +165,9 @@ public class Selection {
     }
 
     /**
+     * 从标准输入中读取一系列字符串； 选择将它们排序；然后将它们按升序打印到标准输出。
+     * 
+     * <p>
      * Reads in a sequence of strings from standard input; selection sorts them; 
      * and prints them to standard output in ascending order. 
      *
