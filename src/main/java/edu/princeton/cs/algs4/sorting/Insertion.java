@@ -29,34 +29,35 @@ import edu.princeton.cs.algs4.io.StdIn;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
- *  The {@code Insertion} class provides static methods for sorting an
- *  array using insertion sort.
+ *  {@code Insertion} 类提供了使用插入排序对数组进行排序的静态方法。
  *  <p>
- *  In the worst case, this implementation makes ~ &frac12; <em>n</em><sup>2</sup>
- *  compares and ~ &frac12; <em>n</em><sup>2</sup> exchanges to sort an array
- *  of length <em>n</em>. So, it is not suitable for sorting large arbitrary
- *  arrays. More precisely, the number of exchanges is exactly equal to the
- *  number of inversions. So, for example, it sorts a partially-sorted array
- *  in linear time.
+ *  在最坏的情况下，此实现进行 ~ &frac12; <em>n</em><sup>2</sup>
+ *  次比较，并且 ~ &frac12; <em>n</em><sup>2</sup> 交换以对长度为 <em>n</em> 的数组进行排序。
+ *  因此，它不适合对大型任意数组进行排序。 更确切地说，交换的数量等于逆序对的数量。 
+ *  因此，例如，它按线性时间对部分有序的数组进行排序。
+ *  
  *  <p>
- *  This sorting algorithm is stable.
- *  It uses &Theta;(1) extra memory (not including the input array).
+ *  这种排序算法是稳定的，
+ *  它使用 &Theta;(1) 额外的内存（不包括输入数组）。
  *  <p>
- *  See <a href="https://algs4.cs.princeton.edu/21elementary/InsertionPedantic.java.html">InsertionPedantic.java</a>
- *  for a version that eliminates the compiler warning.
+ *  有关消除编译器警告的版本，请参见 
+ *  <a href="https://algs4.cs.princeton.edu/21elementary/InsertionPedantic.java.html">InsertionPedantic.java</a>
  *  <p>
- *  For additional documentation, see <a href="https://algs4.cs.princeton.edu/21elementary">Section 2.1</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ *  有关其他文档，请参见 Robert Sedgewick and Kevin Wayne 撰写的 
+ *  <i>第4版算法</i> <a href="https://algs4.cs.princeton.edu/21elementary">2.1节</a>。
+ *  
  *
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
 public class Insertion {
 
-    // This class should not be instantiated.
+    // 这个类不应该被实例化
     private Insertion() { }
 
     /**
+     * 使用自然顺序以升序重新排列数组。
+     * <p>
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
@@ -72,6 +73,8 @@ public class Insertion {
     }
 
     /**
+     * 使用自然顺序以升序重新排列子数组a[lo..hi)
+     * <p>
      * Rearranges the subarray a[lo..hi) in ascending order, using the natural order.
      * @param a the array to be sorted
      * @param lo left endpoint (inclusive)
@@ -87,6 +90,8 @@ public class Insertion {
     }
 
     /**
+     * 使用比较器按升序重新排列数组。
+     * <p>
      * Rearranges the array in ascending order, using a comparator.
      * @param a the array
      * @param comparator the comparator specifying the order
@@ -103,6 +108,8 @@ public class Insertion {
     }
 
     /**
+     * 使用比较器按升序重新排列子数组a[lo..hi)
+     * <p>
      * Rearranges the subarray a[lo..hi) in ascending order, using a comparator.
      * @param a the array
      * @param lo left endpoint (inclusive)
@@ -122,6 +129,8 @@ public class Insertion {
     // return a permutation that gives the elements in a[] in ascending order
     // do not change the original array a[]
     /**
+     * 返回一个排列，该排列以升序给出数组中的元素。
+     * <p>
      * Returns a permutation that gives the elements in the array in ascending order.
      * @param a the array
      * @return a permutation {@code p[]} such that {@code a[p[0]]}, {@code a[p[1]]},
