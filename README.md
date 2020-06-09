@@ -1,14 +1,12 @@
 ## Overview
 
 <IMG SRC="http://algs4.cs.princeton.edu/cover.png"  align=right hspace=25 width=100 alt = "Algorithms 4/e textbook">
-This <a href = "https://github.com/kevin-wayne/algs4">public repository</a>
-contains the Java <a href = "http://algs4.cs.princeton.edu/code/">source code</a>
-for the algorithms and clients in the textbook
-<a href = "http://amzn.to/13VNJi7">Algorithms, 4th Edition</a> by Robert Sedgewick and Kevin Wayne.
-This is the official version&mdash;it is actively maintained and updated by the authors.
-The programs are organized in the package <code>edu.princeton.cs.algs4</code>.
-If you need only the class files (and not the source code), you can use
-<a href = "http://algs4.cs.princeton.edu/code/algs4.jar">algs4.jar</a> instead.
+这个 <a href = "https://github.com/kevin-wayne/algs4">public repository</a>
+包含了 Robert Sedgewick 和 Kevin Wayne 编写的 <a href = "http://amzn.to/13VNJi7">Algorithms, 4th Edition</a> 教科书中的算法和客户机的Java <a href = "http://algs4.cs.princeton.edu/code/">源码</a>。
+这是官方版本&mdash;它由作者积极维护和更新。
+这些程序被组织在 <code>edu.princeton.cs.algs4</code> 包中。
+如果你只是需要类文件(并且不需要源码)，那么你可以使用
+<a href = "http://algs4.cs.princeton.edu/code/algs4.jar">algs4.jar</a> 替代。
 
 <br>
 
