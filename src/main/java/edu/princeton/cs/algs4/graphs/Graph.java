@@ -87,7 +87,8 @@ public class Graph {
      * @param  V number of vertices
      * @throws IllegalArgumentException if {@code V < 0}
      */
-    public Graph(int V) {
+    @SuppressWarnings("unchecked")
+	public Graph(int V) {
         if (V < 0) throw new IllegalArgumentException("Number of vertices must be nonnegative");
         this.V = V;
         this.E = 0;
@@ -109,7 +110,8 @@ public class Graph {
      * @throws IllegalArgumentException if the number of vertices or edges is negative
      * @throws IllegalArgumentException if the input stream is in the wrong format
      */
-    public Graph(In in) {
+    @SuppressWarnings("unchecked")
+	public Graph(In in) {
         if (in == null) throw new IllegalArgumentException("argument is null");
         try {
             this.V = in.readInt();
@@ -140,7 +142,8 @@ public class Graph {
      * @param  G the graph to copy
      * @throws IllegalArgumentException if {@code G} is {@code null}
      */
-    public Graph(Graph G) {
+    @SuppressWarnings("unchecked")
+	public Graph(Graph G) {
         this.V = G.V();
         this.E = G.E();
         if (V < 0) throw new IllegalArgumentException("Number of vertices must be nonnegative");
