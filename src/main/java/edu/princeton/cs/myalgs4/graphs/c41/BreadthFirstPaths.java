@@ -40,119 +40,99 @@
 
 package edu.princeton.cs.myalgs4.graphs.c41;
 
-import edu.princeton.cs.algs4.fundamentals.Queue;
-import edu.princeton.cs.algs4.fundamentals.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
+
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
- *  The {@code BreadthFirstPaths} class represents a data type for finding
- *  shortest paths (number of edges) from a source vertex <em>s</em>
- *  (or a set of source vertices)
- *  to every other vertex in an undirected graph.
- *  <p>
- *  This implementation uses breadth-first search.
- *  The constructor takes &Theta;(<em>V</em> + <em>E</em>) time in the
- *  worst case, where <em>V</em> is the number of vertices and <em>E</em>
- *  is the number of edges.
- *  Each instance method takes &Theta;(1) time.
- *  It uses &Theta;(<em>V</em>) extra space (not including the graph).
- *  <p>
- *  For additional documentation,
- *  see <a href="https://algs4.cs.princeton.edu/41graph">Section 4.1</a>   
- *  of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * 4.1.5 BFS - 最短路径问题
  */
 public class BreadthFirstPaths {
-    private static final int INFINITY = Integer.MAX_VALUE;
-    private boolean[] marked;  // marked[v] = is there an s-v path
-    private int[] edgeTo;      // edgeTo[v] = previous edge on shortest s-v path
-    private int[] distTo;      // distTo[v] = number of edges shortest s-v path
+    private static final int INFINITY = Integer.MAX_VALUE; // 无穷大
+    private boolean[] marked;  // marked[v] = 是否存在一条  s-v 路径
+    private int[] edgeTo;	// edgeTo[v] = 最短s-v路径的前一条边
+    private int[] distTo;      // distTo[v] = 最短s-v路径的长度
 
     /**
-     * Computes the shortest path between the source vertex {@code s}
-     * and every other vertex in the graph {@code G}.
-     * @param G the graph
-     * @param s the source vertex
-     * @throws IllegalArgumentException unless {@code 0 <= s < V}
+     * 单源最短路径
      */
     public BreadthFirstPaths(Graph G, int s) {
         marked = new boolean[G.V()];
-        distTo = new int[G.V()];
         edgeTo = new int[G.V()];
+        distTo = new int[G.V()];
         validateVertex(s);
         bfs(G, s);
 
         assert check(G, s);
     }
 
+    // 单源BFS
+    private void bfs(Graph G, int s) {
+    	marked[s] = true;
+    	for (int v = 0; v < G.V(); v++)
+            distTo[v] = INFINITY;
+        distTo[s] = 0;
+        
+        Queue<Integer> q = new LinkedList<Integer>();
+        q.offer(s);
+        
+        while (!q.isEmpty()) {
+            int v = q.poll();
+            for (int w : G.adj(v)) {
+                if (!marked[w]) {
+                	marked[w] = true;
+                    edgeTo[w] = v;
+                    distTo[w] = distTo[v] + 1;
+                    q.offer(w);
+                }
+            }
+        }
+    }
+    
     /**
-     * Computes the shortest path between any one of the source vertices in {@code sources}
-     * and every other vertex in graph {@code G}.
-     * @param G the graph
-     * @param sources the source vertices
-     * @throws IllegalArgumentException if {@code sources} is {@code null}
-     * @throws IllegalArgumentException unless {@code 0 <= s < V} for each vertex
-     *         {@code s} in {@code sources}
+     * 多源最短路径
      */
     public BreadthFirstPaths(Graph G, Iterable<Integer> sources) {
         marked = new boolean[G.V()];
-        distTo = new int[G.V()];
         edgeTo = new int[G.V()];
+        distTo = new int[G.V()];
         for (int v = 0; v < G.V(); v++)
             distTo[v] = INFINITY;
         validateVertices(sources);
         bfs(G, sources);
     }
 
-
-    // breadth-first search from a single source
-    private void bfs(Graph G, int s) {
-        Queue<Integer> q = new Queue<Integer>();
-        for (int v = 0; v < G.V(); v++)
-            distTo[v] = INFINITY;
-        distTo[s] = 0;
-        marked[s] = true;
-        q.enqueue(s);
-
-        while (!q.isEmpty()) {
-            int v = q.dequeue();
-            for (int w : G.adj(v)) {
-                if (!marked[w]) {
-                    edgeTo[w] = v;
-                    distTo[w] = distTo[v] + 1;
-                    marked[w] = true;
-                    q.enqueue(w);
-                }
-            }
-        }
-    }
-
-    // breadth-first search from multiple sources
+    // 多源BFS
     private void bfs(Graph G, Iterable<Integer> sources) {
-        Queue<Integer> q = new Queue<Integer>();
+    	for (int v = 0; v < G.V(); v++)
+            distTo[v] = INFINITY;
+    	
+        Queue<Integer> q = new LinkedList<Integer>();
         for (int s : sources) {
             marked[s] = true;
             distTo[s] = 0;
-            q.enqueue(s);
+            q.offer(s);
         }
+        
         while (!q.isEmpty()) {
-            int v = q.dequeue();
+            int v = q.poll();
             for (int w : G.adj(v)) {
                 if (!marked[w]) {
+                	marked[w] = true;
                     edgeTo[w] = v;
                     distTo[w] = distTo[v] + 1;
-                    marked[w] = true;
-                    q.enqueue(w);
+                    q.offer(w);
                 }
             }
         }
     }
 
     /**
-     * Is there a path between the source vertex {@code s} (or sources) and vertex {@code v}?
+     * 在源点 {@code s} 和 顶点 {@code v} 之间是否存在一条路径？
+     * 
      * @param v the vertex
      * @return {@code true} if there is a path, and {@code false} otherwise
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
@@ -163,8 +143,8 @@ public class BreadthFirstPaths {
     }
 
     /**
-     * Returns the number of edges in a shortest path between the source vertex {@code s}
-     * (or sources) and vertex {@code v}?
+     * 源点 {@code s} 和 顶点 {@code v} 之间的最短路径的长度
+     * 
      * @param v the vertex
      * @return the number of edges in a shortest path
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
@@ -175,8 +155,8 @@ public class BreadthFirstPaths {
     }
 
     /**
-     * Returns a shortest path between the source vertex {@code s} (or sources)
-     * and {@code v}, or {@code null} if no such path.
+     * 源点 {@code s} 和 顶点 {@code v} 之间的最短路径
+     * 
      * @param  v the vertex
      * @return the sequence of vertices on a shortest path, as an Iterable
      * @throws IllegalArgumentException unless {@code 0 <= v < V}
@@ -184,7 +164,8 @@ public class BreadthFirstPaths {
     public Iterable<Integer> pathTo(int v) {
         validateVertex(v);
         if (!hasPathTo(v)) return null;
-        Stack<Integer> path = new Stack<Integer>();
+        
+        Deque<Integer> path = new LinkedList<Integer>();
         int x;
         for (x = v; distTo[x] != 0; x = edgeTo[x])
             path.push(x);
@@ -193,7 +174,7 @@ public class BreadthFirstPaths {
     }
 
 
-    // check optimality conditions for single source
+    // 检查单源的最佳条件
     private boolean check(Graph G, int s) {
 
         // check that the distance of s = 0
@@ -258,9 +239,9 @@ public class BreadthFirstPaths {
     }
 
     /**
-     * Unit tests the {@code BreadthFirstPaths} data type.
+     * 单元测试 {@code BreadthFirstPaths} 数据类型
      *
-     * @param args the command-line arguments
+     * @param args 命令行参数
      */
     public static void main(String[] args) {
         In in = new In(args[0]);
