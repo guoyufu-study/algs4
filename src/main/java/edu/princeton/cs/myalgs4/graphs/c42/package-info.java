@@ -5,6 +5,9 @@
  * <p>
  * {@link edu.princeton.cs.myalgs4.graphs.c42.DirectedDFS DirectedDFS} 4.2.3 有向图的可达问题
  * 
+ * <p>
+ * {@link edu.princeton.cs.myalgs4.graphs.c42.DepthFirstDirectedPaths DepthFirstDirectedPaths} 4.2.3 有向图的单源路径问题
+ * 
  * 
  */
 package edu.princeton.cs.myalgs4.graphs.c42;

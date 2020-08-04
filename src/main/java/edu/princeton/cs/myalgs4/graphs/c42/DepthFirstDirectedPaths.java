@@ -36,6 +36,9 @@ import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
+ * 4.2.3 有向图的单（多）源路径问题
+ * 
+ * <p>
  *  The {@code DepthFirstDirectedPaths} class represents a data type for
  *  finding directed paths from a source vertex <em>s</em> to every
  *  other vertex in the digraph.
@@ -56,15 +59,16 @@ import edu.princeton.cs.algs4.io.StdOut;
  *  @author Kevin Wayne
  */
 public class DepthFirstDirectedPaths {
-    private boolean[] marked;  // marked[v] = true iff v is reachable from s
-    private int[] edgeTo;	// edgeTo[v] = last edge on path from s to v
-    private final int s;	// source vertex
+    private boolean[] marked;  // marked[v] = true 如果 v 从 s 可达
+    private int[] edgeTo;	// edgeTo[v] = 从 s 到 v 的最后一条边
+    private final int s;	// 源点
 
     /**
-     * Computes a directed path from {@code s} to every other vertex in digraph {@code G}.
-     * @param  G the digraph
-     * @param  s the source vertex
-     * @throws IllegalArgumentException unless {@code 0 <= s < V}
+     * 计算有向图  {@code G} 中从源点{@code s} 到每一个顶点的一条有向路径
+     * 
+     * @param  G 有向图
+     * @param  s 源点
+     * @throws IllegalArgumentException 除非 {@code 0 <= s < V}
      */
     public DepthFirstDirectedPaths(Digraph G, int s) {
         marked = new boolean[G.V()];
@@ -85,11 +89,11 @@ public class DepthFirstDirectedPaths {
     }
 
     /**
-     * Is there a directed path from the source vertex {@code s} to vertex {@code v}?
-     * @param  v the vertex
-     * @return {@code true} if there is a directed path from the source
-     *         vertex {@code s} to vertex {@code v}, {@code false} otherwise
-     * @throws IllegalArgumentException unless {@code 0 <= v < V}
+     * 是否存在一条从源点 {@code s} 到顶点 {@code v} 的有向路径？
+     * 
+     * @param  v 顶点
+     * @return {@code true} 如果存在一条从源点 {@code s} 到顶点 {@code v} 的有向路径, {@code false} 其它情况。
+     * @throws IllegalArgumentException 除非 {@code 0 <= v < V}
      */
     public boolean hasPathTo(int v) {
         validateVertex(v);
@@ -98,12 +102,13 @@ public class DepthFirstDirectedPaths {
 
     
     /**
-     * Returns a directed path from the source vertex {@code s} to vertex {@code v}, or
-     * {@code null} if no such path.
-     * @param  v the vertex
+     * 返回从源点x {@code s} 到顶点 {@code v} 的一条有向路径, 或者返回
+     * {@code null} 如果不存在这样一条路径。
+     * 
+     * @param  v 顶点
      * @return the sequence of vertices on a directed path from the source vertex
      *         {@code s} to vertex {@code v}, as an Iterable
-     * @throws IllegalArgumentException unless {@code 0 <= v < V}
+     * @throws IllegalArgumentException 除非 {@code 0 <= v < V}
      */
     public Iterable<Integer> pathTo(int v) {
         validateVertex(v);
@@ -125,9 +130,9 @@ public class DepthFirstDirectedPaths {
     }
 
     /**
-     * Unit tests the {@code DepthFirstDirectedPaths} data type.
+     * 单元测试 {@code DepthFirstDirectedPaths} 数据类型
      *
-     * @param args the command-line arguments
+     * @param args 命令行参数
      */
     public static void main(String[] args) {
     	
