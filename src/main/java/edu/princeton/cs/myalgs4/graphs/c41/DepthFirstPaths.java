@@ -37,16 +37,20 @@ import edu.princeton.cs.algs4.graphs.Graph;
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 
+/**
+ * 4.1.4 DFS 单点路径问题
+ *
+ */
 public class DepthFirstPaths {
 
 	private boolean[] marked;
-	private final int s;
 	private int[] edgeTo;
+	private final int s;
 	
 	public DepthFirstPaths(Graph G, int s) {
-		this.s = s;
-		edgeTo = new int[G.V()];
 		marked = new boolean[G.V()];
+		edgeTo = new int[G.V()];
+		this.s = s;
 		validateVertex(s);
 		dfs(G, s);
 	}
@@ -64,15 +68,20 @@ public class DepthFirstPaths {
 				edgeTo[w] = v;
 				dfs(G, w);
 			}
-			
 		}
 	}
 
+	/**
+	 * 是否存在从 s 到 v 的路径
+	 */
 	public boolean hasPathTo(int v) {
 		validateVertex(v);
 		return marked[v];
 	}
 	
+	/**
+	 * s 到 v 的路径，如果不存在则返回null
+	 */
 	public Iterable<Integer> pathTo(int v) {
 		validateVertex(v);
 		
