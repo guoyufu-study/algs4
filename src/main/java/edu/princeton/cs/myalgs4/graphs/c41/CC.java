@@ -1,8 +1,8 @@
 /******************************************************************************
- *  Compilation:  javac CC.java
- *  Execution:    java CC filename.txt
- *  Dependencies: Graph.java StdOut.java Queue.java
- *  Data files:   https://algs4.cs.princeton.edu/41graph/tinyG.txt
+ *  编译:  javac CC.java
+ *  执行:    java CC filename.txt
+ *  依赖: Graph.java StdOut.java Queue.java
+ *  数据文件:   https://algs4.cs.princeton.edu/41graph/tinyG.txt
  *                https://algs4.cs.princeton.edu/41graph/mediumG.txt
  *                https://algs4.cs.princeton.edu/41graph/largeG.txt
  *
@@ -36,33 +36,8 @@ import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
- *  The {@code CC} class represents a data type for 
- *  determining the connected components in an undirected graph.
- *  The <em>id</em> operation determines in which connected component
- *  a given vertex lies; the <em>connected</em> operation
- *  determines whether two vertices are in the same connected component;
- *  the <em>count</em> operation determines the number of connected
- *  components; and the <em>size</em> operation determines the number
- *  of vertices in the connect component containing a given vertex.
-
- *  The <em>component identifier</em> of a connected component is one of the
- *  vertices in the connected component: two vertices have the same component
- *  identifier if and only if they are in the same connected component.
-
- *  <p>
- *  This implementation uses depth-first search.
- *  The constructor takes &Theta;(<em>V</em> + <em>E</em>) time,
- *  where <em>V</em> is the number of vertices and <em>E</em> is the
- *  number of edges.
- *  Each instance method takes &Theta;(1) time.
- *  It uses &Theta;(<em>V</em>) extra space (not including the graph).
- *  <p>
- *  For additional documentation, see 
- *  <a href="https://algs4.cs.princeton.edu/41graph">Section 4.1</a>   
- *  of <em>Algorithms, 4th Edition</em> by Robert Sedgewick and Kevin Wayne.
- *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
+ * 连通分量
+ * <P> 使用 DFS 找出图中所有连通分量
  */
 public class CC {
     private boolean[] marked;   // marked[v] = has vertex v been marked?
@@ -71,9 +46,7 @@ public class CC {
     private int count;          // number of connected components
 
     /**
-     * Computes the connected components of the undirected graph {@code G}.
-     *
-     * @param G the undirected graph
+     * 计算无向图 {@code G} 的连通分量。
      */
     public CC(Graph G) {
         marked = new boolean[G.V()];
@@ -88,9 +61,9 @@ public class CC {
     }
 
     /**
-     * Computes the connected components of the edge-weighted graph {@code G}.
+     * 计算加权图 {@code G} 的连通分量
      *
-     * @param G the edge-weighted graph
+     * @param G 加权图
      */
 //    public CC(EdgeWeightedGraph G) {
 //        marked = new boolean[G.V()];
@@ -104,7 +77,7 @@ public class CC {
 //        }
 //    }
 
-    // depth-first search for a Graph
+    // DFS
     private void dfs(Graph G, int v) {
         marked[v] = true;
         id[v] = count;
@@ -116,7 +89,7 @@ public class CC {
         }
     }
 
-    // depth-first search for an EdgeWeightedGraph
+    // 加权图 DFS
 //    private void dfs(EdgeWeightedGraph G, int v) {
 //        marked[v] = true;
 //        id[v] = count;
@@ -131,11 +104,11 @@ public class CC {
 
 
     /**
-     * Returns the component id of the connected component containing vertex {@code v}.
+     * {@code V} 所在的连通分量的标识符
      *
-     * @param  v the vertex
-     * @return the component id of the connected component containing vertex {@code v}
-     * @throws IllegalArgumentException unless {@code 0 <= v < V}
+     * @param  v 顶点
+     * @return 顶点 {@code V} 所在的连通分量的标识符
+     * @throws IllegalArgumentException 除非 {@code 0 <= v < V}
      */
     public int id(int v) {
         validateVertex(v);
@@ -143,11 +116,11 @@ public class CC {
     }
 
     /**
-     * Returns the number of vertices in the connected component containing vertex {@code v}.
+     *  {@code v} 所在的连通分量的大小
      *
-     * @param  v the vertex
-     * @return the number of vertices in the connected component containing vertex {@code v}
-     * @throws IllegalArgumentException unless {@code 0 <= v < V}
+     * @param  v 顶点
+     * @return 顶点 {@code v} 所在的连通分量的大小
+     * @throws IllegalArgumentException 除非 {@code 0 <= v < V}
      */
     public int size(int v) {
         validateVertex(v);
@@ -155,24 +128,20 @@ public class CC {
     }
 
     /**
-     * Returns the number of connected components in the graph {@code G}.
-     *
-     * @return the number of connected components in the graph {@code G}
+     * 图 {@code G} 的连通分量数
      */
     public int count() {
         return count;
     }
 
     /**
-     * Returns true if vertices {@code v} and {@code w} are in the same
-     * connected component.
+     *  {@code v} 和 {@code w} 连通吗？
      *
-     * @param  v one vertex
-     * @param  w the other vertex
-     * @return {@code true} if vertices {@code v} and {@code w} are in the same
-     *         connected component; {@code false} otherwise
-     * @throws IllegalArgumentException unless {@code 0 <= v < V}
-     * @throws IllegalArgumentException unless {@code 0 <= w < V}
+     * @param  v 一个顶点
+     * @param  w 另一个顶点
+     * @return {@code true} 如果 {@code v} 和 {@code w} 连通； {@code false} 其它情况
+     * @throws IllegalArgumentException 除非 {@code 0 <= v < V}
+     * @throws IllegalArgumentException 除非 {@code 0 <= w < V}
      */
     public boolean connected(int v, int w) {
         validateVertex(v);
@@ -181,15 +150,8 @@ public class CC {
     }
 
     /**
-     * Returns true if vertices {@code v} and {@code w} are in the same
-     * connected component.
+     * {@code v} 和 {@code w} 连通吗？
      *
-     * @param  v one vertex
-     * @param  w the other vertex
-     * @return {@code true} if vertices {@code v} and {@code w} are in the same
-     *         connected component; {@code false} otherwise
-     * @throws IllegalArgumentException unless {@code 0 <= v < V}
-     * @throws IllegalArgumentException unless {@code 0 <= w < V}
      * @deprecated Replaced by {@link #connected(int, int)}.
      */
     @Deprecated
@@ -207,11 +169,12 @@ public class CC {
     }
 
     /**
-     * Unit tests the {@code CC} data type.
+     *  单元测试 {@code CC} 数据类型
      *
      * @param args the command-line arguments
      */
-    public static void main(String[] args) {
+    @SuppressWarnings("unchecked")
+	public static void main(String[] args) {
         In in = new In(args[0]);
         Graph G = new Graph(in);
         CC cc = new CC(G);
