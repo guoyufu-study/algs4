@@ -23,6 +23,10 @@ package edu.princeton.cs.myalgs4.graphs.c41;
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 
+/**
+ * 4.1.3 连通性问题（路径探测问题）
+ *
+ */
 public class DepthFirstSearch {
 
 	private boolean[] marked; // marked[v] = 是否存在一条 s-v 路径?
@@ -43,11 +47,17 @@ public class DepthFirstSearch {
 		}
 	}
 
+	/**
+	 * v 和 s 是连通的吗？
+	 */
 	public boolean marked(int v) {
         validateVertex(v);
         return marked[v];
     }
 	
+	/**
+	 * 与 s 连通的顶点总数
+	 */
 	public int count() {
         return count;
     }
@@ -71,6 +81,8 @@ public class DepthFirstSearch {
 				StdOut.print(v + " ");
 		}
 		StdOut.println();
+		
+		// 是否连通图
 		if(search.count != G.V()) StdOut.println("NOT connected");
 		else 		StdOut.println("connected");
 		
