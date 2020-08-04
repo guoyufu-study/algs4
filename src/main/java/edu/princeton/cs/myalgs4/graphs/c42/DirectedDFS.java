@@ -27,6 +27,9 @@ import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
+ * 4.2.3 有向图的可达性问题
+ * 
+ * <p>
  *  The {@code DirectedDFS} class represents a data type for 
  *  determining the vertices reachable from a given source vertex <em>s</em>
  *  (or set of source vertices) in a digraph. For versions that find the paths,
@@ -47,11 +50,12 @@ import edu.princeton.cs.algs4.io.StdOut;
  *  @author Kevin Wayne
  */
 public class DirectedDFS {
-    private boolean[] marked;  // marked[v] = true iff v is reachable from source(s)
-    private int count;         // number of vertices reachable from source(s)
+    private boolean[] marked;  // marked[v] = true 如果 v 从源点 s 可达
+    private int count;         // 从源点可达的顶点总数
 
     /**
      * 计算图 {@code G} 中从给定源点 {@code s} 可达的顶点。
+     * 
      * @param G the digraph
      * @param s the source vertex
      * @throws IllegalArgumentException unless {@code 0 <= s < V}
