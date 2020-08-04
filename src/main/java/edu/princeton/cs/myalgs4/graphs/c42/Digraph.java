@@ -37,15 +37,18 @@ import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 
 /**
- *  The {@code Digraph} class represents a directed graph of vertices
- *  named 0 through <em>V</em> - 1.
- *  It supports the following two primary operations: add an edge to the digraph,
- *  iterate over all of the vertices adjacent from a given vertex.
- *  It also provides
- *  methods for returning the indegree or outdegree of a vertex, 
- *  the number of vertices <em>V</em> in the digraph, 
- *  the number of edges <em>E</em> in the digraph, and the reverse digraph.
- *  Parallel edges and self-loops are permitted.
+ * 有向图的数据类型。
+ * 
+ * <p>
+ *  {@code Digraph} 表示一个有向图。
+ *  
+ *  它支持以下两个主要操作:向有向图添加一条边，迭代与给定顶点相邻的所有顶点。
+ *  
+ *  它还提供了一些方法，用于返回一个顶点的入度或出度、有向图中顶点的数量 <em>V</em>、有向图中边的数量 <em>E</em> 
+ *  以及有向图的反向图。
+ *  
+ *  该类允许平行边和自环。
+ *  
  *  <p>
  *  This implementation uses an <em>adjacency-lists representation</em>, which
  *  is a vertex-indexed array of {@link Bag} objects.
@@ -67,6 +70,7 @@ import edu.princeton.cs.algs4.io.StdOut;
  */
 
 public class Digraph {
+	
     private static final String NEWLINE = System.getProperty("line.separator");
 
     private final int V;           // 顶点总数
@@ -76,6 +80,7 @@ public class Digraph {
     
     /**
      * 创建一幅有向图，其中含有 V 个顶点，但没有边。
+     * 
      * @param V 顶点总数
      */
     @SuppressWarnings("unchecked")
@@ -96,9 +101,10 @@ public class Digraph {
 
     /**  
      * 从输入流 in 中读取一幅有向图。
-     * The format is the number of vertices <em>V</em>,
-     * followed by the number of edges <em>E</em>,
-     * followed by <em>E</em> pairs of vertices, with each entry separated by whitespace.
+     * 
+     * 顶点总数 <em>V</em>,
+     * 紧接着边的总数 <em>E</em>,
+     * 接着 <em>E</em> 对顶点，每个条目用空格分隔。
      *
      */
     @SuppressWarnings("unchecked")
@@ -133,6 +139,11 @@ public class Digraph {
         }
     }
 
+    /**
+     * 复制图
+     * 
+     * @param G
+     */
     @SuppressWarnings("unchecked")
 	public Digraph(Digraph G) {
         if (G == null) 
@@ -188,6 +199,7 @@ public class Digraph {
 
     /**
      * 添加一条边
+     * 
      * @param v 头
      * @param w 尾
      */
@@ -201,6 +213,7 @@ public class Digraph {
 
     /**
      * 顶点 v 的邻接顶点
+     * 
      * @param v
      * @return
      */
@@ -211,6 +224,7 @@ public class Digraph {
 
     /**
      * 顶点 v 的出度
+     * 
      * @param v
      * @return
      */
@@ -221,6 +235,7 @@ public class Digraph {
 
     /**
      * 顶点 v 的入度
+     * 
      * @param v
      * @return
      */
@@ -231,6 +246,7 @@ public class Digraph {
 
     /**
      * 反向图
+     * 
      * @return
      */
     public Digraph reverse() {
@@ -261,8 +277,12 @@ public class Digraph {
 
     public static void main(String[] args) {
         In in = new In(args[0]);
+        
         Digraph G = new Digraph(in);
+        
         StdOut.println(G);
+        
+        StdOut.println(G.reverse());
     }
 
 }
