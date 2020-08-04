@@ -36,42 +36,57 @@
 
 package edu.princeton.cs.myalgs4.graphs.c41;
 
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.fundamentals.Bag;
 import edu.princeton.cs.algs4.io.In;
 import edu.princeton.cs.algs4.io.StdOut;
 
+/**
+ * 无向图数据类型
+ *
+ */
 public class Graph {
 
 	private static final String NEWLINE = System.getProperty("line.separator");
-	
+
 	private final int V;
 	private int E;
 	private Bag<Integer>[] adj;
-	
-	
+
+	/**
+	 * 创建一幅无边图
+	 * 
+	 * @param V
+	 */
 	@SuppressWarnings("unchecked")
 	public Graph(int V) {
-		if (V < 0) 
+		if (V < 0)
 			throw new IllegalArgumentException("Number of vertices must be nonnegative");
-		
+
 		this.V = V;
-		this.E =  0;
+		this.E = 0;
 		adj = (Bag<Integer>[]) new Bag[V];
 		for (int v = 0; v < V; v++) {
 			adj[v] = new Bag<Integer>();
 		}
 	}
-	
+
+	/**
+	 * 从输入流 in 中读图
+	 * 
+	 * @param in
+	 */
 	public Graph(In in) {
 		this(in.readInt());
-		
+
 		try {
 			int E = in.readInt();
-			if (E < 0) 
+			if (E < 0)
 				throw new IllegalArgumentException("number of edges in a Graph must be nonnegative");
-			
+
 			for (int i = 0; i < E; i++) {
 				int v = in.readInt();
 				int w = in.readInt();
@@ -80,7 +95,54 @@ public class Graph {
 		} catch (NoSuchElementException e) {
 			throw new IllegalArgumentException("invalid input format in Graph constructor", e);
 		}
-		
+
+	}
+
+	/**
+	 * 添加一条边(v, w)
+	 * 
+	 * @param v
+	 * @param w
+	 */
+	public void addEdge(int v, int w) {
+		validateVertex(v);
+		validateVertex(w);
+		E++;
+		adj[v].add(w);
+		adj[w].add(v);
+
+	}
+
+	private void validateVertex(int v) {
+		if (v < 0 || v >= V)
+			throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V - 1));
+	}
+
+	/**
+	 * 复制图
+	 */
+	@SuppressWarnings("unchecked")
+	public Graph(Graph G) {
+		if (G.V() < 0)
+			throw new IllegalArgumentException("Number of vertices must be nonnegative");
+		this.V = G.V();
+
+		this.E = G.E();
+
+		adj = (Bag<Integer>[]) new Bag[V];
+		for (int v = 0; v < V; v++) {
+			adj[v] = new Bag<Integer>();
+		}
+
+		for (int v = 0; v < G.V(); v++) {
+			Deque<Integer> reverse = new LinkedList<Integer>();
+			for (int w : G.adj[v]) {
+				reverse.push(w);
+			}
+			for (int w : reverse) {
+				adj[v].add(w);
+			}
+		}
 	}
 
 	public int V() {
@@ -100,36 +162,69 @@ public class Graph {
 		validateVertex(v);
 		return adj[v].size();
 	}
-	
+
+	/**
+	 * 度数
+	 */
+	public static int degree(Graph G, int v) {
+		return G.adj[v].size();
+	}
+
+	/**
+	 * 最大度数
+	 */
+	public static int maxDegree(Graph G) {
+		int max = 0;
+		for (int v = 0; v < G.V(); v++) {
+			if (max < degree(G, v)) {
+				max = degree(G, v);
+			}
+		}
+
+		return max;
+	}
+
+	/**
+	 * 平均度数
+	 */
+	public static double avgDegree(Graph G) {
+		return 2.0 * G.E() / G.V();
+	}
+
+	/**
+	 * 自环数
+	 */
+	public static int numberOfSelfLoops(Graph G) {
+		int count = 0;
+		for (int v = 0; v < G.V(); v++) {
+			for (int w : G.adj(v)) {
+				if (w == v)
+					count++;
+			}
+		}
+
+		return count / 2;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder s = new StringBuilder();
-		s.append(V + " vertices, " + E + " edges " + NEWLINE);
+		s.append(V)
+			.append(" vertices, ")
+			.append(E)
+			.append(" edges ")
+			.append(NEWLINE);
+		
 		for (int v = 0; v < V; v++) {
-			s.append(v + ": ");
+			s.append(v).append(": ");
 			for (int w : adj[v]) {
-				s.append(w + " ");
+				s.append(w).append(" ");
 			}
 			s.append(NEWLINE);
 		}
 		return s.toString();
 	}
-	
-	public void addEdge(int v, int w) {
-		validateVertex(v);
-		validateVertex(w);
-		E++;
-		adj[v].add(w);
-		adj[w].add(v);
-		
-	}
 
-	private void validateVertex(int v) {
-		if (v < 0 || v >= V)
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
-	}
-	
-	
 	public static void main(String[] args) {
 		In in = new In(args[0]);
 		Graph G = new Graph(in);
